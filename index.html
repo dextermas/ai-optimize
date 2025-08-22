@@ -184,8 +184,12 @@
 
         // The main router function
         const router = () => {
-            // Get the current path from the URL
-            const path = window.location.pathname;
+            let path = window.location.pathname;
+            // NEW: Check if the path is '/index.html' and redirect to the base URL
+            if (path === '/index.html') {
+                history.replaceState({}, '', '/');
+                path = '/';
+            }
             // Find the page content function for the current path
             const page = routes[path] || notFoundPage;
             // Update the main content area with the new HTML
